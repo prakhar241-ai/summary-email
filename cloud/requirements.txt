@@ -1,0 +1,4 @@
+functions-framework
+google-api-python-client
+google-auth
+anthropic

@@ -1,0 +1,9 @@
+# Never commit secrets or personal email data
+token.json
+credentials.json
+.env
+summaries/*.md
+summaries/run.log
+
+__pycache__/
+*.pyc

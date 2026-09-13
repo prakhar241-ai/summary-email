@@ -1,0 +1,22 @@
+name: Daily inbox summary
+
+on:
+  schedule:
+    # 01:30 UTC = 07:00 IST. GitHub may start a few minutes late under load.
+    - cron: "30 1 * * *"
+  workflow_dispatch: {}   # lets you run it manually from the Actions tab
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # imap_summary.py uses only the Python standard library — no pip install.
+      - name: Send summary
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python imap_summary.py
