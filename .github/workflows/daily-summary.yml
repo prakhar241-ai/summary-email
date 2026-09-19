@@ -1,11 +1,16 @@
 name: Daily inbox summary
 
+# The daily 7 AM run now happens on the laptop (Windows task
+# SummaryEmail_Daily7AM). The cron that used to live here never once fired --
+# GitHub silently skipped every scheduled run -- so it was removed rather than
+# left looking functional.
+#
+# This workflow is kept as a manual backup: Actions tab -> Run workflow, useful
+# when the laptop is off. To restore the schedule, re-add:
+#   schedule:
+#     - cron: "41 1 * * *"   # 07:11 IST
 on:
-  schedule:
-    # 01:41 UTC = 07:11 IST. Deliberately an odd minute: GitHub drops/delays
-    # scheduled runs most at the top of the hour and on :00/:15/:30/:45.
-    - cron: "41 1 * * *"
-  workflow_dispatch: {}   # lets you run it manually from the Actions tab
+  workflow_dispatch: {}
 
 jobs:
   summarize:
